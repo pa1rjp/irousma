@@ -39,6 +39,10 @@ angular.module('app.controllers', [])
         function(error) {
             console.error("Error:", error);
         });
+
+    $scope.selectTable = function() {
+    	$state.go('selectTable');
+    };
 })
 
 .controller('tableCtrl', function($scope, $firebaseArray, Utils, $firebaseAuth, orderService, $state) {
@@ -62,7 +66,7 @@ angular.module('app.controllers', [])
     };
 
     $scope.selectMenu = function() {
-        orderService.neworder.user = auth.$getAuth().email;
+        orderService.neworder.user = $scope.user.email;
         $state.go("selectMenu");
     };
 })
@@ -156,7 +160,7 @@ angular.module('app.controllers', [])
     };
 })
 
-.controller('reviewCtrl', function($scope, $firebaseArray, Utils, $firebaseAuth, orderService) {
+.controller('reviewCtrl', function($scope, $firebaseArray, Utils, $firebaseAuth, orderService, $state) {
     console.log(orderService.neworder);
     /* firebase ref to database */
     var ref = firebase.database().ref();
