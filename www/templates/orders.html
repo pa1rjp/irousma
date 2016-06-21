@@ -10,11 +10,18 @@
                 No orders to show.
             </div>
         </div>
-        <div class="list" ng-hide="noorders">
-            <a class="item item-icon-right" href="#">
-                <span>{{user.name}}</span>
-                <i class="icon ion-chevron-right"></i>
-            </a>
+        <div class="list card"  ng-hide="noorders">
+            <div class="item item-button-right reviewitem" ng-repeat="order in orders">
+                <div style="display: inline-flex; float: left;">
+                    <h2 style="position: absolute;top: 14px;font-size: 15px;">Order {{$index+1}}</h2>
+                    <p style="position: absolute;top: 35px;font-size: 12px;">{{order.table.name}}&nbsp;<span style="font-weight:bold;color:#666;">ORDERED</span></p>
+                </div>
+                <div class="button-bar" style="float: right;right: 0px;width:35%;">
+                    <a class="button button-small button-outline button-calm icon ion-edit" ng-click="" style="padding:0;margin-right: 5px;border-width: 1px;"></a>
+                    <a class="button button-small button-outline button-balanced icon ion-printer" ng-click="" style="padding: 0;margin-right: 5px;border-width: 1px;""></a>
+                    <a class="button button-small button-outline button-assertive icon ion-trash-a" ng-click="" style="padding:0"></a>
+                </div>
+            </div>
         </div>
     </ion-content>
 </ion-view>

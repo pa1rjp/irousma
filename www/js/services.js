@@ -94,7 +94,8 @@ angular.module('app.services', [])
         totalQty: null,
         totalBill: null,
         kitchennotes: null,
-        datetime: new Date()
+        datetime: new Date(),
+        status: "ordered"
     };
 
     this.refresh = function() {
@@ -106,7 +107,8 @@ angular.module('app.services', [])
             totalQty: null,
             totalBill: null,
             kitchennotes: null,
-            datetime: new Date()
+            datetime: new Date(),
+            status: "ordered"
         };
     };
 
