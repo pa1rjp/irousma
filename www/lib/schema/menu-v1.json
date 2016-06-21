@@ -1,0 +1,147 @@
+{
+    "manifest":{
+        "tables": [{
+            "id": 1,
+            "name": "table1",
+            "isavailable": true
+        },{
+            "id": 2,
+            "name": "table2",
+            "isavailable": true
+        },{
+            "id": 3,
+            "name": "table3",
+            "isavailable": true
+        },{
+            "id": 4,
+            "name": "table4",
+            "isavailable": true
+        },{
+            "id": 5,
+            "name": "table5",
+            "isavailable": true
+        },{
+            "id": 6,
+            "name": "table6",
+            "isavailable": true
+        },{
+            "id": 7,
+            "name": "table7",
+            "isavailable": true
+        },{
+            "id": 8,
+            "name": "table8",
+            "isavailable": true
+        },{
+            "id": 9,
+            "name": "table9",
+            "isavailable": true
+        }],
+        "type": ["dining in", "take away"],
+        "currency": "rupee",
+        "tax": {
+            "enable": false,
+            "percentage": 0
+        }
+    },
+    "orders": [],
+    "menu": [{
+        "id": 1,
+        "name": "veg starter",
+        "description": "",
+        "type": "veg",
+        "items": [{
+            "id": 1,
+            "name": "paneer 65",
+            "price": 160
+        }, {
+            "id": 1,
+            "name": "mashroom 65",
+            "price": 180
+        }, {
+            "id": 1,
+            "name": "baby corn 65",
+            "price": 190
+        }, {
+            "id": 1,
+            "name": "gobi 65",
+            "price": 120
+        }]
+    }, {
+        "id": 2,
+        "name": "nonveg starter",
+        "description": "",
+        "type": "nonveg",
+        "items": [{
+            "id": 1,
+            "name": "chilly chicken",
+            "price": 205
+        }, {
+            "id": 1,
+            "name": "chicken pakoda",
+            "price": 215
+        }, {
+            "id": 1,
+            "name": "chicken fry",
+            "price": 190
+        }, {
+            "id": 1,
+            "name": "mutton peper fry",
+            "price": 220
+        }]
+    }, {
+        "id": 3,
+        "name": "roti",
+        "description": "",
+        "type": "veg",
+        "items": [{
+            "id": 1,
+            "name": "phulka",
+            "price": 15
+        }, {
+            "id": 1,
+            "name": "butter phulka",
+            "price": 30
+        }, {
+            "id": 1,
+            "name": "chapathi",
+            "price": 35
+        }]
+    }, {
+        "id": 3,
+        "name": "veg curry",
+        "description": "",
+        "type": "veg",
+        "items": [{
+            "id": 1,
+            "name": "veg kadai",
+            "price": 145
+        }, {
+            "id": 1,
+            "name": "dal fry",
+            "price": 120
+        }, {
+            "id": 1,
+            "name": "tomato curry",
+            "price": 135
+        }]
+    }, {
+        "id": 3,
+        "name": "nonveg curry",
+        "description": "",
+        "type": "nonveg",
+        "items": [{
+            "id": 1,
+            "name": "butter chicken",
+            "price": 225
+        }, {
+            "id": 1,
+            "name": "egg fry",
+            "price": 140
+        }, {
+            "id": 1,
+            "name": "fish curry",
+            "price": 250
+        }]
+    }]
+}

@@ -1,0 +1,13 @@
+{
+	"id": 1,
+	"datetime": "",
+	"table": "table1",
+	"covers": 2,
+	"waiter": "pa1rjp@gmail.com",
+	"items": [],
+	"totalbill": 500,
+	"tax": 0,
+	"discount": 0,
+	"kitchennotes": "",
+	"type": "dinning"
+}

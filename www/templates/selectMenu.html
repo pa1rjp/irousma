@@ -1,0 +1,51 @@
+<ion-view title="Select Menu" id="page7" class=" " hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button class="button button-stable" ui-sref="selectTable">
+            <i class="icon ion-chevron-left"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-balanced" ui-sref="reviewOrder">
+            Order <span class="badge badge-dark" style="display: inline-block;">{{totalQty || 0}}</span>
+        </button>
+    </ion-nav-buttons>
+    <ion-content padding="true" class="has-header">
+    <div class="card" ng-show="nomenu">
+            <div class="item item-text-wrap" style="text-align: center;color: #666;">
+                No menu to show.
+            </div>
+        </div>
+        <div class="list list-inset menu-search" ng-hide="nomenu">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="item.name">
+            </label>
+        </div>
+        <ion-list ng-hide="nomenu">
+            <div ng-repeat="group in groups">
+                <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
+                    <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i> &nbsp; {{group.name}}
+                    <i class="icon " ng-class="isVeg(group.type) ? 'ion-veg' : 'ion-nonveg'"></i>
+                </ion-item>
+                <ion-item class="item-accordion" ng-repeat="item in group.items | filter:item" ng-show="isGroupShown(group)">
+                    <div style="display: inline-flex; float: left;">
+                        <h2 style="position: absolute;top: 10px;font-size: 15px;">{{item.name}}</h2>
+                        <p style="position: absolute;top: 30px;font-size: 12px;">&#8377;&nbsp;{{item.price}}</p>
+                    </div>
+                    <div class="button-bar" style="float: right;right: 0px;width:35%;margin-top:2px;">
+                        <a class="button button-small icon ion-minus-round" ng-click="removeQty(item)" style="border-color: #ddd #fff #ddd #ddd;padding:0"></a>
+                        <a class="button button-small button-light button-outline" style="border-color: #ddd #fff;line-height: 2;font-size: 16px;padding: 0;color:#666;">{{item.qty || 0}}</a>
+                        <a class="button button-small icon ion-plus-round" ng-click="addQty(item, qtycount)" style="border-color: #ddd #ddd #ddd #fff;padding:0"></a>
+                    </div>
+                    <!-- <i class="icon ion-minus-round qty-minus" ng-click="removeQty(item)"></i>
+                    <span class="qty-item">
+                        					<span class="qty-item-title">{{item.name}}</span>
+                    <span class="badge badge-light qty-item-qty" ng-model="qtycount">Qty:&nbsp;{{item.qty || 0}}</span>
+                    <span class="badge badge-light qty-item-price">&#8377;&nbsp;{{item.price}}</span>
+                    </span>
+                    <i class="icon ion-plus-round qty-plus" ng-click="addQty(item, qtycount)"></i> -->
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,27 @@
+<ion-view title="Select Table" id="page6" class=" " hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button class="button button-stable" ui-sref="menu.orders">
+            <i class="icon ion-chevron-left"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-content padding="true" class="has-header">
+        <form id="selectTable-form3" class="list ">
+            <label class="item item-select " id="selectTable-select2">
+                <span class="input-label">Table</span>
+                <select>
+                    <option value="{{table.id}}" ng-repeat="table in tables">{{table.name}}</option>
+                </select>
+            </label>
+            <label class="item item-input " id="selectTable-input5">
+                <span class="input-label">Covers</span>
+                <input ng-model="covers" type="number" class="text-right" placeholder="0">
+            </label>
+            <label class="item item-input " id="selectTable-input6">
+                <span class="input-label">Waiter</span>
+                <input type="text" class="text-right" disabled="true" style="background-color: transparent;" placeholder="name" ng-model="user.email">
+            </label>
+        </form>
+        <button id="selectTable-button12" ui-sref="selectMenu" class=" button button-balanced  button-block ">Continue</button>
+        <button id="selectTable-button13" ui-sref="menu.orders" class=" button button-dark  button-block ">Seat Guest</button>
+    </ion-content>
+</ion-view>

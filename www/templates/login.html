@@ -1,0 +1,18 @@
+<ion-view title="Login" id="page4" class=" " hide-back-button="true">
+    <ion-content padding="true" class="has-header">
+        <form id="login-form1" class="list ">
+            <ion-list id="login-list1" class=" ">
+                <label class="item item-input item-floating-label" id="login-input1">
+                    <span class="input-label">Username</span>
+                    <input type="text" placeholder="Email" ng-model="email">
+                </label>
+                <label class="item item-input item-floating-label" id="login-input2">
+                    <span class="input-label">Password</span>
+                    <input type="password" placeholder="Password" ng-model="pwd">
+                </label>
+            </ion-list>
+            <div class="spacer" style="height: 40px;"></div>
+            <button id="login-button1" class=" button button-balanced button-block " ng-click="login(email, pwd)">Log in</button>
+        </form>
+    </ion-content>
+</ion-view>

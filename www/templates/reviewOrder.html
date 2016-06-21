@@ -1,0 +1,37 @@
+<ion-view title="Review Order" id="page8" class=" " hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button class="button button-stable" ui-sref="selectMenu">
+            <i class="icon ion-chevron-left"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-content padding="true" class="has-header">
+        <div class="list">
+            <div class="item item-button-right reviewitem" ng-repeat="item in orderitems">
+                <div style="display: inline-flex; float: left;">
+                <h2 style="position: absolute;top: 14px;font-size: 15px;">{{item.name}}</h2>
+                <p style="position: absolute;top: 35px;font-size: 12px;">&#8377;&nbsp;{{item.price}}</p>
+                </div>
+                <div class="button-bar" style="float: right;right: 0px;width:35%;">
+                    <a class="button button-small icon ion-minus-round" ng-click="removeQty(item)" style="border-color: #ddd #fff #ddd #ddd;padding:0"></a>
+                    <a class="button button-small button-light button-outline" style="border-color: #ddd #fff;line-height: 2;font-size: 16px;padding: 0;color:#666;">{{item.qty || 0}}</a>
+                    <a class="button button-small icon ion-plus-round" ng-click="addQty(item, qtycount)" style="border-color: #ddd #ddd #ddd #fff;padding:0"></a>
+                </div>
+            </div>
+            <div class="item item-avatar assertive" style="text-align:right;padding: 15px;min-height: 20px;font-weight:bold;">
+                <p style="color: #ef473a;">Total: {{totalBill}}</p>
+            </div>
+        </div>
+        <form id="reviewOrder-form6" class="list ">
+            <label class="item item-input " id="reviewOrder-select7">
+                <span class="input-label">Type</span>
+                <input type="text" class="text-right" disabled="true" style="background-color: transparent;" placeholder="name" ng-model="ordertype">
+            </label>
+        </form>
+        <form id="reviewOrder-form7" class="list ">
+            <label class="item item-input " id="reviewOrder-textarea2">
+                <textarea placeholder="Kitchen notes" style="height:80px;"></textarea>
+            </label>
+        </form>
+        <button id="reviewOrder-button14" class=" button button-balanced  button-block ">Send to kitchen</button>
+    </ion-content>
+</ion-view>

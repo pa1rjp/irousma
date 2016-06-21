@@ -1,0 +1,93 @@
+#selectTable-select2 {
+    padding: 6px 0 5px 16px;
+}
+.ion-veg{
+	background-image: url('../img/veg.gif');
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 20px;
+}
+.ion-nonveg{
+	background-image: url('../img/nonveg.gif');
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 20px;
+}
+.btn-qty{
+	min-height: 20px !important;
+    min-width: 20px !important;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+.qty-control{
+	display: inline;
+}
+.text-qty{
+	width: 20px;
+}
+.button {
+	font-weight: bold !important;
+}
+
+.list .item.item-accordion {
+  /* line-height: 38px; */
+  padding: 10px;
+  transition: 0.09s all linear;
+  height: 60px;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+.qty-minus {
+	position: absolute;
+	left: 13px;
+	line-height: 45px;
+	border-right: 1px solid #e5e5e5;
+}
+.qty-minus:before {
+	padding-right: 10px;
+}
+.qty-plus {
+	position: absolute;
+	right: 13px;
+	line-height: 45px;
+	border-left: 1px solid #e5e5e5;
+}
+.qty-plus:before {
+	padding-left: 10px;
+}
+.qty-item {
+	margin-left: 35px;
+}
+.qty-item-title {
+	margin-left: 10px;
+}
+.qty-item-qty {
+	left: 45px;
+    top: 32px !important;
+    width: 50px;
+    padding: 0;
+}
+.qty-item-price {
+	right: 45px;
+    top: 30px !important;
+    margin-right: 5px;
+}
+.menu-search {
+	margin: 0 0 10px 0;
+}
+.text-right {
+	text-align: right;
+}
+.reviewitem {
+	padding: 15px;
+}

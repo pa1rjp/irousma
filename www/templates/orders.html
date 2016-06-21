@@ -1,0 +1,20 @@
+<ion-view title="Orders" id="page5" class=" " hide-back-button="true" ng-controller="ordersCtrl">
+    <ion-nav-buttons side="right">
+        <button class="button button-balanced" ui-sref="selectTable">
+            <i class="icon ion-plus-round"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-content padding="true" class="has-header">
+        <div class="card" ng-show="noorders">
+            <div class="item item-text-wrap" style="text-align: center;color: #666;">
+                No orders to show.
+            </div>
+        </div>
+        <div class="list" ng-hide="noorders">
+            <a class="item item-icon-right" href="#">
+                <span>{{user.name}}</span>
+                <i class="icon ion-chevron-right"></i>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
