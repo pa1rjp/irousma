@@ -21,18 +21,18 @@ angular.module('app.controllers', [])
 })
 
 .controller('ordersCtrl', function($scope, Utils, $firebaseAuth, $state, $firebaseArray) {
-	/* firebase ref to database */
+    /* firebase ref to database */
     var ref = firebase.database().ref();
     var orders = $firebaseArray(ref.child('orders'));
     $scope.noorders = true;
     Utils.show();
     orders.$loaded(
         function(orders) {
-            if(orders.length == 0) {
-            	$scope.noorders = true;
+            if (orders.length == 0) {
+                $scope.noorders = true;
             } else {
-            	$scope.noorders = false;
-            	$scope.orders = orders;
+                $scope.noorders = false;
+                $scope.orders = orders;
             };
             Utils.hide();
         },
@@ -40,6 +40,60 @@ angular.module('app.controllers', [])
             console.error("Error:", error);
         });
 })
+
+.controller('tableCtrl', function($scope, $firebaseArray, Utils, $firebaseAuth, orderService, $state) {
+    /* firebase ref to database */
+    var ref = firebase.database().ref();
+    /* firebase ref to auth */
+    var auth = $firebaseAuth();
+
+    $scope.tables = $firebaseArray(ref.child('tables'));
+    $scope.selectedTable = orderService.neworder.table != null ? orderService.neworder.table : "select";
+    /* no of customers on the table */
+    $scope.covers = orderService.neworder.covers != null ? orderService.neworder.covers : 0;
+    /* get present logged in user details*/
+    $scope.user = orderService.neworder.user != null ? orderService.neworder.user : auth.$getAuth();
+
+    $scope.countChange =function(c) {
+    	orderService.neworder.covers = c;
+    };
+    $scope.selectTable =function(t) {
+    	orderService.neworder.table = $scope.tables[t-1];
+    };
+
+    $scope.selectMenu = function() {
+    	orderService.neworder.user = auth.$getAuth();
+    	$state.go("selectMenu");
+    };
+})
+
+.controller('menuCtrl', function($scope, $firebaseObject, Utils, $firebaseAuth, orderService) {
+    /* firebase ref to database */
+    var ref = firebase.database().ref();
+    /* firebase ref to auth */
+    var auth = $firebaseAuth();
+    console.log(orderService.neworder);
+
+    $scope.groups = $firebaseObject(ref.child('menu'));
+    /* fun that converts ionic list to accordian */
+    $scope.toggleGroup = function(group) {
+        if ($scope.isGroupShown(group)) {
+            $scope.shownGroup = null;
+        } else {
+            $scope.shownGroup = group;
+        }
+    };
+    $scope.isGroupShown = function(group) {
+        return $scope.shownGroup === group;
+    };
+
+    /* check if the menu category is veg or non veg*/
+    $scope.isVeg = function(val) {
+        return val == "veg" ? true : false;
+    };
+})
+
+.controller('reviewCtrl', function($scope, $firebaseObject, Utils, $firebaseAuth, orderService) {})
 
 .controller('neworderCtrl', function($scope, $firebaseObject, Utils, $firebaseAuth, orderService) {
     /* firebase ref to database */

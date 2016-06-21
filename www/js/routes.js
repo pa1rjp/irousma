@@ -35,21 +35,22 @@ angular.module('app.routes', [])
     })
 
     .state('selectTable', {
+        cache: false,
         url: '/selecttable',
         templateUrl: 'templates/selectTable.html',
-        controller: 'neworderCtrl'
+        controller: 'tableCtrl'
     })
 
     .state('selectMenu', {
         url: '/selectmenu',
         templateUrl: 'templates/selectMenu.html',
-        controller: 'neworderCtrl'
+        controller: 'menuCtrl'
     })
 
     .state('reviewOrder', {
         url: '/revieworder',
         templateUrl: 'templates/reviewOrder.html',
-        controller: 'neworderCtrl'
+        controller: 'reviewCtrl'
     })
 
     .state('menu.mergeOrders', {

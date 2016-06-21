@@ -86,6 +86,29 @@ angular.module('app.services', [])
 })
 
 .service('orderService', [function() {
+    this.neworder = {
+        table: null,
+        covers: null,
+        user: null
+    };
+
+    this.refresh = function() {
+        this.neworder = {
+            table: null,
+            covers: null,
+            user: null
+        };
+    };
+
+
+
+
+
+
+
+
+
+
     this.totalbill = 0;
     this.items = [];
     this.qty = 0;
