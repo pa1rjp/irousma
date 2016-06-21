@@ -29,9 +29,9 @@
         </form>
         <form id="reviewOrder-form7" class="list ">
             <label class="item item-input " id="reviewOrder-textarea2">
-                <textarea placeholder="Kitchen notes" style="height:80px;"></textarea>
+                <textarea placeholder="Kitchen notes" ng-model="kitchennotes" style="height:80px;"></textarea>
             </label>
         </form>
-        <button id="reviewOrder-button14" class=" button button-balanced  button-block ">Send to kitchen</button>
+        <button id="reviewOrder-button14" class=" button button-balanced  button-block " ng-click="saveorder()">Send to kitchen</button>
     </ion-content>
 </ion-view>

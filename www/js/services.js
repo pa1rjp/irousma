@@ -89,14 +89,24 @@ angular.module('app.services', [])
     this.neworder = {
         table: null,
         covers: null,
-        user: null
+        user: null,
+        orderitems: null,
+        totalQty: null,
+        totalBill: null,
+        kitchennotes: null,
+        datetime: new Date()
     };
 
     this.refresh = function() {
         this.neworder = {
             table: null,
             covers: null,
-            user: null
+            user: null,
+            orderitems: null,
+            totalQty: null,
+            totalBill: null,
+            kitchennotes: null,
+            datetime: new Date()
         };
     };
 

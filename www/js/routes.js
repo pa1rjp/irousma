@@ -42,6 +42,7 @@ angular.module('app.routes', [])
     })
 
     .state('selectMenu', {
+        cache: false,
         url: '/selectmenu',
         templateUrl: 'templates/selectMenu.html',
         controller: 'menuCtrl'
