@@ -22,29 +22,28 @@ angular.module('app.services', [])
                 template: msg
             });
             alertPopup.then(function(res) {
-                //console.log('Registrado correctamente.');
+                console.log('Registrado correctamente.');
             });
         },
 
         errMessage: function(err) {
 
             var msg = "Unknown Error...";
+            console.log("in service");
+            console.log(err);
 
             if (err && err.code) {
                 switch (err.code) {
-                    case "EMAIL_TAKEN":
-                        msg = "This Email has been taken.";
+                    case "auth/argument-error":
+                        msg = "Email and Password are required.";
                         break;
-                    case "INVALID_EMAIL":
+                    case "auth/invalid-email":
                         msg = "Invalid Email.";
                         break;
-                    case "NETWORK_ERROR":
-                        msg = "Network Error.";
-                        break;
-                    case "INVALID_PASSWORD":
+                    case "auth/wrong-password":
                         msg = "Invalid Password.";
                         break;
-                    case "INVALID_USER":
+                    case "auth/user-not-found":
                         msg = "Invalid User.";
                         break;
                 }

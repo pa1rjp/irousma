@@ -4,23 +4,28 @@ angular.module('app.controllers', [])
     var auth = $firebaseAuth();
     $scope.logout = function() {
         auth.$signOut();
+        $state.go('menu.login');
     };
 })
 
 .controller('loginCtrl', function($scope, $firebase, Utils, $firebaseAuth, $state) {
     var auth = $firebaseAuth();
+    $scope.email = "pa1rjp@gmail.com";
+    $scope.pwd = "pa1rjp";
     console.log(auth);
     $scope.login = function(email, pwd) {
-        Utils.show();
-        auth.$signInWithEmailAndPassword(email, pwd).catch(function(err) {
-            console.log(err);
-        });
-        $state.go('menu.orders');
-        Utils.hide();
+        console.log(auth);
+        auth.$signInWithEmailAndPassword(email, pwd)
+            .then(function(user) {
+                $state.go('menu.orders');
+            })
+            .catch(function(err) {
+                Utils.errMessage(err);
+            });
     }
 })
 
-.controller('ordersCtrl', function($scope, Utils, $firebaseAuth, $state, $firebaseArray) {
+.controller('ordersCtrl', function($scope, Utils, $firebaseAuth, $state, $firebaseArray, orderService) {
     /* firebase ref to database */
     var ref = firebase.database().ref();
     var orders = $firebaseArray(ref.child('orders'));
@@ -41,7 +46,19 @@ angular.module('app.controllers', [])
         });
 
     $scope.selectTable = function() {
-    	$state.go('selectTable');
+        $state.go('selectTable');
+    };
+
+    $scope.deleteOrder = function(order) {
+        orders.$remove(orders.$indexFor(order.$id)).then(function(ref) {
+            $state.go('menu.orders');
+        });
+    };
+
+    $scope.editOrder = function(order) {
+        orderService.refresh();
+        orderService.neworder = order;
+        $state.go('selectTable');
     };
 })
 
@@ -56,7 +73,7 @@ angular.module('app.controllers', [])
     /* no of customers on the table */
     $scope.covers = orderService.neworder.covers != null ? orderService.neworder.covers : 0;
     /* get present logged in user details*/
-    $scope.user = orderService.neworder.user != null ? orderService.neworder.user : auth.$getAuth();
+    $scope.user = auth.$getAuth();
 
     $scope.countChange = function(c) {
         orderService.neworder.covers = c;
@@ -152,7 +169,21 @@ angular.module('app.controllers', [])
         $scope.totalBill = bill;
     };
 
+    $scope.getQty = function(item) {
+        if ($scope.orderitems.length > 0) {
+            for (var i = 0; i < $scope.orderitems.length; i++) {
+                if ($scope.orderitems[i].name == item.name) {
+                    return item.qty = $scope.orderitems[i].qty;
+                };
+            }
+        } else {
+            return item.qty = 0;
+        };
+    };
+
     $scope.reviewOrder = function() {
+    	console.log(orderService.neworder);
+    	console.log($scope.orderitems, $scope.totalQty, $scope.totalBill);
         orderService.neworder.orderitems = $scope.orderitems;
         orderService.neworder.totalQty = $scope.totalQty;
         orderService.neworder.totalBill = $scope.totalBill;
@@ -174,7 +205,7 @@ angular.module('app.controllers', [])
     $scope.kitchennotes = orderService.neworder.kitchennotes != null ? orderService.neworder.kitchennotes : "";
     /* total items qty ordered */
     $scope.totalQty = orderService.neworder.totalQty != null ? orderService.neworder.totalQty : 0;
-
+console.log($scope.orderitems, $scope.totalQty, $scope.totalBill)
     /* funcitons to add qty */
     $scope.addQty = function(item) {
         var isItemAdd = false;

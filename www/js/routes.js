@@ -49,6 +49,7 @@ angular.module('app.routes', [])
     })
 
     .state('reviewOrder', {
+        cache: false,
         url: '/revieworder',
         templateUrl: 'templates/reviewOrder.html',
         controller: 'reviewCtrl'

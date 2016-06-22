@@ -34,7 +34,7 @@
                     </div>
                     <div class="button-bar" style="float: right;right: 0px;width:35%;margin-top:2px;">
                         <a class="button button-small icon ion-minus-round" ng-click="removeQty(item)" style="border-color: #ddd #fff #ddd #ddd;padding:0"></a>
-                        <a class="button button-small button-light button-outline" style="border-color: #ddd #fff;line-height: 2;font-size: 16px;padding: 0;color:#666;">{{item.qty || 0}}</a>
+                        <a class="button button-small button-light button-outline" style="border-color: #ddd #fff;line-height: 2;font-size: 16px;padding: 0;color:#666;" ng-bind="getQty(item) || 0"></a>
                         <a class="button button-small icon ion-plus-round" ng-click="addQty(item, qtycount)" style="border-color: #ddd #ddd #ddd #fff;padding:0"></a>
                     </div>
                     <!-- <i class="icon ion-minus-round qty-minus" ng-click="removeQty(item)"></i>
