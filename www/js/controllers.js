@@ -60,6 +60,15 @@ angular.module('app.controllers', [])
         orderService.neworder = order;
         $state.go('selectTable');
     };
+
+    $scope.updateStatus = function(order, status) {
+        console.log(order);
+        var order = orders.$getRecord(order.$id);
+        order.status = status;
+        orders.$save(order).then(function() {
+            // data has been saved to our database
+        });
+    };
 })
 
 .controller('tableCtrl', function($scope, $firebaseArray, Utils, $firebaseAuth, orderService, $state) {
