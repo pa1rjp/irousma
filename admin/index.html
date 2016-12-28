@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Database Viewer</title>
+    <!-- Jquery -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <!-- json viewer
+	https://github.com/abodelot/jquery.json-viewer
+	 -->
+    <link rel="stylesheet" href="css/json-viewer.css">
+    <script src="js/json-viewer.js"></script>
+    <!-- Firebase setup -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCuwQq3P24PA93U-Gzs38I6l7smtpaU7oM",
+        authDomain: "project-7969878900018752041.firebaseapp.com",
+        databaseURL: "https://project-7969878900018752041.firebaseio.com",
+        storageBucket: "project-7969878900018752041.appspot.com",
+        messagingSenderId: "251941061634"
+    };
+    firebase.initializeApp(config);
+    /*$('select').on('change', function() {
+        alert(this.value);
+    })*/
+    function getdata(select) {
+        $(select).hide();
+        $('#circularG').show();
+        var ordersRef = firebase.database().ref(select.value);
+        ordersRef.on('value', function(snapshot) {
+        	$('#circularG').hide();
+            $('#json-renderer').jsonViewer(snapshot.val());
+            $(select).show();
+        });
+    };
+    </script>
+</head>
+
+<body style="margin: auto 50px;">
+    <div class="form">
+        <h3><strong>Orders Database view, select endpoint</strong></h3>
+        <select name="endpoints" id="endpoints" onchange="getdata(this);">
+            <option value="none">--Select endpoint--</option>
+            <option value="manifest">manifest</option>
+            <option value="menu">menu</option>
+            <option value="orders">orders</option>
+            <option value="tables">tables</option>
+        </select>
+    </div>
+    <div id="circularG" class="hide">
+        <div id="circularG_1" class="circularG"></div>
+        <div id="circularG_2" class="circularG"></div>
+        <div id="circularG_3" class="circularG"></div>
+        <div id="circularG_4" class="circularG"></div>
+        <div id="circularG_5" class="circularG"></div>
+        <div id="circularG_6" class="circularG"></div>
+        <div id="circularG_7" class="circularG"></div>
+        <div id="circularG_8" class="circularG"></div>
+    </div>
+    <pre id="json-renderer"></pre>
+</body>
+
+</html>
