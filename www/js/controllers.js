@@ -25,7 +25,7 @@ angular.module('app.controllers', [])
     }
 })
 
-.controller('ordersCtrl', function($scope, Utils, $firebaseAuth, $state, $firebaseArray, orderService) {
+.controller('ordersCtrl', function($scope, Utils, $firebaseAuth, $state, $firebaseArray, orderService, $ionicPopup) {
     /* firebase ref to database */
     var ref = firebase.database().ref();
     var orders = $firebaseArray(ref.child('orders'));
@@ -44,7 +44,60 @@ angular.module('app.controllers', [])
         function(error) {
             console.error("Error:", error);
         });
+    $scope.showOrderDetail = function(order){
+        //console.log(order.$id);
 
+
+        //var order = orders.$getRecord(order.$id);
+        var orderitems = order.orderitems;
+        var str='';
+        var total =0;
+        str +='<ion-scroll style="height: 250px">'; 
+       for(var i =0;i<orderitems.length;i++)
+        {
+            str +='<div class="item item-button-right reviewitem">';
+                str += '<div style="display: inline-flex; float: left;">';
+                    str += '<h2 style="position: absolute;top: 14px;font-size: 15px;">'+orderitems[i].name+'</h2>';
+                    str += '<p style="position: absolute;top: 35px;font-size: 12px;">&#8377;&nbsp;'+ orderitems[i].price+ '</p>';
+                    total += (orderitems[i].price * orderitems[i].qty); 
+                str += '</div>';
+                str += '<div class="button-bar" style="float: right;right: 0px;width:35%;">';
+                    str += '<p class="button button-small button-light " style="line-height: 2;font-size: 16px;padding: 0;color:#666;">'+orderitems[i].qty +'</p>';
+                str += '</div>';
+            str += '</div>';
+            
+            //console.log(orderitems[i].name);
+        }
+            str += '</ion-scroll>';
+            str += '<div class="item item-avatar assertive" style="text-align:right;padding: 15px;min-height: 20px;font-weight:bold;">';
+                str += '<p style="color: #ef473a;">Total: '+total +'</p>';
+            str += '</div>';
+            $ionicPopup.show({
+    template: str ,
+    title: 'Order Details <br/> <h6 style="color:gray">Your Order No # <b> A-123Xy</b></h6>',
+    //subTitle: '<h6>Your Order No #</h6> 123',
+    scope: $scope,
+    cssClass: 'my-custom-popup',
+    buttons: [{ text: '<b>Ok</b>',type: 'button-balanced', }//,
+      // {
+      //   text: '<b>Save</b>',
+      //   
+      //   onTap: function(e) {
+      //     if (!$scope.data.wifi) {
+      //       //don't allow the user to close unless he enters wifi password
+      //       e.preventDefault();
+      //     } else {
+      //       return $scope.data.wifi;
+      //     }
+      //   }
+      //}
+    ]
+  });
+        //var orderitems = $firebaseArray(order.child('orderitems'));
+        // console.log($scope.orderitems);
+        // $state.go('showOrder');
+
+    };
     $scope.selectTable = function() {
         $state.go('selectTable');
     };
@@ -389,5 +442,21 @@ console.log($scope.orderitems, $scope.totalQty, $scope.totalBill)
 })
 
 .controller('showOrderCtrl', function($scope) {
-
+// var ref = firebase.database().ref();
+//     var orders = $firebaseArray(ref.child('orders'));
+//     $scope.noorders = true;
+//     Utils.show();
+//     orders.$loaded(
+//         function(orders) {
+//             if (orders.length == 0) {
+//                 $scope.noorders = true;
+//             } else {
+//                 $scope.noorders = false;
+//                 $scope.orders = orders;
+//             };
+//             Utils.hide();
+//         },
+//         function(error) {
+//             console.error("Error:", error);
+//         });
 })
