@@ -10,50 +10,51 @@
                 No orders to show.
             </div>
         </div>
-        <div class="list card"  ng-hide="noorders">
-            <div class="item item-button-right reviewitem"  ng-repeat="order in orders | filter: {status : '!printed'}" style="color: #666;" ng-click="showOrderDetail(order,$index +1)" > <!-- background-color: green; -->
+        <div class="list card" ng-hide="noorders">
+            <div class="item item-button-right reviewitem" ng-repeat="order in orders | filter: {status : '!printed'}" style="color: #666;" ng-click="showOrderDetail(order,$index +1)">
+                <!-- background-color: green; -->
                 <div style="display: inline-flex; float: left;">
                     <h2 style="position: absolute;top: 14px;font-size: 15px;color: #666;">Order {{$index+1}}</h2>
-                    <p style="position: absolute;top: 35px;font-size: 12px;color: #666;">{{order.table.name}}&nbsp;<span style="font-weight:bold;color: #666;">{{order.status}}</span><span style="padding-left: 15px;color: #666;">{{order.ts | date:"dd-MM-yy hh:mm a"}}</span></p>
+                    <p style="position: absolute;top: 35px;font-size: 12px;color: #666;">{{order.table.name}}&nbsp;<span style="font-weight:bold;color: #666;">{{order.status}}</span><span style="padding-left: 15px;color: #666;">{{order.ts | date:"hh:mm"}}</span></p>
                 </div>
                 <div class="button-bar" style="float: right;right: 0px;width:37%;">
                     <a class="button button-small button-outline button-calm icon ion-edit" ng-show="order.status == 'ordered'" ng-click="editOrder(order)" style="padding:0;margin-right: 5px;border-width: 1px;"></a>
-                    <a class="button button-small button-outline button-balanced icon ion-printer" ng-click="updateStatus(order, 'printed')" style="padding: 0;margin-right: 5px;border-width: 1px;""></a>
-                    <a class="button button-small button-outline button-assertive icon ion-trash-a" ng-show="order.status == 'ordered'" ng-click="deleteOrder(order)" style="padding:0"></a>
+                    <a class="button button-small button-outline button-balanced icon ion-printer" ng-click="updateStatus(order, 'printed')" style="padding: 0;margin-right: 5px;border-width: 1px;" "></a>
+                    <a class="button button-small button-outline button-assertive icon ion-trash-a " ng-show="order.status=='ordered' " ng-click="deleteOrder(order) " style="padding:0 "></a>
                 </div>
             </div>
         </div>
 
-<script id="popup.html" type="text/ng-template">
-    
-    <ion-modal-view >
-    <ion-content >
-        <div style="text-align: center;border-bottom: 2px #ddd solid;">
-            <h2>Order Details</h2>
-            <h4>Order No #{{orderid}}</h4>
-        </div>
-            <div style="height: 73%">
-                <ion-scroll style="min-height:100px;height:70% ;">
-                <div ng-repeat="orderi in orderitems" ng-show ="showpop">
-                    <div class="item item-button-right reviewitem">
-                        <div style="display: inline-flex; float: left;">
-                            <h2 style="position: absolute;top: 14px;font-size: 15px;">{{orderi.name}}</h2>
-                            <p style="position: absolute;top: 35px;font-size: 12px;">&#8377;&nbsp; {{orderi.price}} </p>
-                        </div>
-                        <div class="button-bar" style="float: right;right: 0px;width:35%;">
-                            <p class="button button-small button-light " style="line-height: 2;font-size: 16px;padding: 0;color:#666;">{{orderi.qty}}</p>
-                        </div>
+        <script id="popup.html " type="text/ng-template ">
+            <ion-modal-view>
+                <ion-header-bar class="bar-stable bar bar-header">
+                  <h1 class="title ">Order Details</h1>
+                </ion-header-bar>
+                <ion-content scroll="false" scrollbar-x="false" scrollbar-y="false">
+                    <div class="list" style="margin-bottom: 0px;">
+                        <p class="item item-divider">
+                            Order#: {{orderid}}
+                            <span class="badge badge-balanced">00:00</span>
+                        </p>
                     </div>
-                </div>
-                </ion-scroll>
-            </div>
-            <div class="item item-avatar assertive" style="text-align:right;padding: 15px;min-height: 20px;font-weight:bold;">
-                <p style="color: #ef473a;">Total: {{total}}</p>
-            </div>
-        <div style="float: center;"><a class="button button-balanced"  ng-click="closeModal()" style="padding:0;margin-right: 5px;border-width: 1px;width: 100%;">Ok</a></div>
-    </ion-content>
-    </ion-modal-view>
-    
-    </script>
+                    <ion-scroll zooming="false" direction="y" style="height: 79%">
+                        <div class="list">
+                            <a class="item" href="#" ng-repeat="orderi in orderitems">
+                              <h2>{{orderi.name}}</h2>
+                              <p>x&nbsp;{{orderi.qty}}</p>
+                              <span class="badge badge-light"> &#8377;&nbsp; {{orderi.price}}</span>
+                            </a>
+                        </div>
+                    </ion-scroll>
+                    <div class="list" style="margin-bottom: 0px;padding-bottom: 0px; font-size: 18px;">
+                        <strong class="item item-divider">
+                            Total
+                            <span class="badge badge-stable"> &#8377;&nbsp; {{total}}</span>
+                        </strong>
+                    </div>
+                    <button class="button button-full button-balanced" ng-click="closeModal()" style="margin: 0px;">OK</button>
+                </ion-content>
+            </ion-modal-view>
+        </script>
     </ion-content>
 </ion-view>

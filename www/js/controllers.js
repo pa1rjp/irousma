@@ -25,33 +25,31 @@ angular.module('app.controllers', [])
     }
 })
 
-.controller('ordersCtrl', function($scope, Utils, $firebaseAuth, $state, $firebaseArray, orderService, $ionicPopup,$ionicModal) {
+.controller('ordersCtrl', function($scope, Utils, $firebaseAuth, $state, $firebaseArray, orderService, $ionicPopup, $ionicModal) {
     /* firebase ref to database */
     // var ts = new Date();
 
-//     var d1 = new Date (),
-//     d2 = new Date ( d1 );
-// d2.setMinutes ( d1.getMinutes() + 30 );
-// alert ( d2 );
+    //     var d1 = new Date (),
+    //     d2 = new Date ( d1 );
+    // d2.setMinutes ( d1.getMinutes() + 30 );
+    // alert ( d2 );
 
     var ref = firebase.database().ref();
     var orders = $firebaseArray(ref.child('orders'));
     $scope.noorders = true;
     Utils.show();
-     var d1 = new Date();//'02-01-2017 03:56:57.012 PM'
+    var d1 = new Date(); //'02-01-2017 03:56:57.012 PM'
     orders.$loaded(
         function(orders) {
             if (orders.length == 0) {
                 $scope.noorders = true;
             } else {
                 $scope.noorders = false;
-               
-                for(var i=0;i< orders.length;i++){
-                
-                 d2 = new Date (d1);
-                 orders[i].ts = d2.setMinutes ( d1.getMinutes() +(i*15)+ 5 );
-                 //orders[i].diff = Math.ceil(Math.abs(d2.getTime()-d1.getTime())/(1000 * 3600 * 24));
-                 //console.log(orders[i].ts);
+                for (var i = 0; i < orders.length; i++) {
+                    d2 = new Date(d1);
+                    orders[i].ts = d2.setMinutes(d1.getMinutes() + (i * 15) + 5);
+                    //orders[i].diff = Math.ceil(Math.abs(d2.getTime()-d1.getTime())/(1000 * 3600 * 24));
+                    //console.log(orders[i].ts);
                 }
                 $scope.orders = orders;
                 console.log($scope.orders);
@@ -61,23 +59,23 @@ angular.module('app.controllers', [])
         function(error) {
             console.error("Error:", error);
         });
-   
-        $scope.showpop=false;
-    
-    $scope.showOrderDetail = function(order,orderid){
-         //var orderitems = ;
-        $scope.showpop=true;
+
+    $scope.showpop = false;
+
+    $scope.showOrderDetail = function(order, orderid) {
+        //var orderitems = ;
+        $scope.showpop = true;
         $scope.orderitems = order.orderitems;
         $scope.total = order.totalBill;
         $scope.orderid = orderid;
 
-        $ionicModal.fromTemplateUrl('popup.html',{
+        $ionicModal.fromTemplateUrl('popup.html', {
             scope: $scope,
-            animation:'fade-in'
-        }).then(function(model){
-                $scope.modal = model;
-                $scope.modal.show();
-            });
+            animation: 'slide-in-up'
+        }).then(function(model) {
+            $scope.modal = model;
+            $scope.modal.show();
+        });
         $scope.closeModal = function() {
             $scope.modal.hide();
         };
@@ -228,8 +226,8 @@ angular.module('app.controllers', [])
     };
 
     $scope.reviewOrder = function() {
-    	console.log(orderService.neworder);
-    	console.log($scope.orderitems, $scope.totalQty, $scope.totalBill);
+        console.log(orderService.neworder);
+        console.log($scope.orderitems, $scope.totalQty, $scope.totalBill);
         orderService.neworder.orderitems = $scope.orderitems;
         orderService.neworder.totalQty = $scope.totalQty;
         orderService.neworder.totalBill = $scope.totalBill;
@@ -251,8 +249,8 @@ angular.module('app.controllers', [])
     $scope.kitchennotes = orderService.neworder.kitchennotes != null ? orderService.neworder.kitchennotes : "";
     /* total items qty ordered */
     $scope.totalQty = orderService.neworder.totalQty != null ? orderService.neworder.totalQty : 0;
-console.log($scope.orderitems, $scope.totalQty, $scope.totalBill)
-    /* funcitons to add qty */
+    console.log($scope.orderitems, $scope.totalQty, $scope.totalBill)
+        /* funcitons to add qty */
     $scope.addQty = function(item) {
         var isItemAdd = false;
         for (var i = 0; i < $scope.orderitems.length; i++) {
@@ -426,21 +424,21 @@ console.log($scope.orderitems, $scope.totalQty, $scope.totalBill)
 })
 
 .controller('showOrderCtrl', function($scope) {
-// var ref = firebase.database().ref();
-//     var orders = $firebaseArray(ref.child('orders'));
-//     $scope.noorders = true;
-//     Utils.show();
-//     orders.$loaded(
-//         function(orders) {
-//             if (orders.length == 0) {
-//                 $scope.noorders = true;
-//             } else {
-//                 $scope.noorders = false;
-//                 $scope.orders = orders;
-//             };
-//             Utils.hide();
-//         },
-//         function(error) {
-//             console.error("Error:", error);
-//         });
+    // var ref = firebase.database().ref();
+    //     var orders = $firebaseArray(ref.child('orders'));
+    //     $scope.noorders = true;
+    //     Utils.show();
+    //     orders.$loaded(
+    //         function(orders) {
+    //             if (orders.length == 0) {
+    //                 $scope.noorders = true;
+    //             } else {
+    //                 $scope.noorders = false;
+    //                 $scope.orders = orders;
+    //             };
+    //             Utils.hide();
+    //         },
+    //         function(error) {
+    //             console.error("Error:", error);
+    //         });
 })
