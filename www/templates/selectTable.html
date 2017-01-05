@@ -19,7 +19,11 @@
             </label>
             <label class="item item-input " id="selectTable-input6">
                 <span class="input-label">Waiter</span>
-                <input type="text" class="text-right" disabled="true" style="background-color: transparent;" placeholder="name" ng-model="user.email">
+				<select ng-model="selectedWaiter" ng-change="selectWaiters(selectedWaiter)">
+                <option ng-selected="true" value="select">Select</option>
+                <option ng-selected="{{waiter.email == selectedWaiter.email}}" value="{{waiter.id}}" ng-repeat="waiter in waiters">{{waiter.email}}</option>
+                </select>
+                <!--<input type="text" class="text-right" disabled="true" style="background-color: transparent;" placeholder="name" ng-model="user.email">-->
             </label>
         </form>
         <button id="selectTable-button12" ng-click="selectMenu()" class=" button button-balanced  button-block ">Continue</button>
