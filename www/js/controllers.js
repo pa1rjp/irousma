@@ -130,7 +130,7 @@ angular.module('app.controllers', [])
     };
 
     $scope.selectMenu = function() {
-        orderService.neworder.user = $scope.user.email;
+       /* orderService.neworder.user = $scope.user.email; */
         $state.go("selectMenu");
     };
 	
