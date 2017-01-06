@@ -84,6 +84,22 @@ angular.module('app.services', [])
     return _order;
 })
 
+.factory('emptyorderFactory',function(){
+
+    var emptyorder = {
+        "id": 1,
+        "datetime": "",
+        "table": "",
+        "covers": 0,
+        "waiter": "",
+        "type": "dine in"
+    };
+    var _empty = { emptyorder: function(){
+        return emptyorder;}
+    };
+    return _empty;
+})
+
 .service('orderService', [function() {
     this.neworder = {
         table: null,
@@ -96,6 +112,14 @@ angular.module('app.services', [])
         kitchennotes: null,
         datetime: new Date(),
         status: "ordered"
+    };
+
+    this.emptyorder = {
+        table: null,
+        covers: null,
+        user: null,
+        datetime: new Date(),
+        status: "waiting"
     };
 
     this.refresh = function() {
@@ -111,15 +135,6 @@ angular.module('app.services', [])
             status: "ordered"
         };
     };
-
-
-
-
-
-
-
-
-
 
     this.totalbill = 0;
     this.items = [];
