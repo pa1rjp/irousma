@@ -46,6 +46,9 @@ angular.module('app.services', [])
                     case "auth/user-not-found":
                         msg = "Invalid User.";
                         break;
+                    case 1:
+                        msg =  err.Msg;
+                        break;
                 }
             }
             Utils.alertshow("Error", msg);
