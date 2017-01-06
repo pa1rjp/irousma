@@ -126,23 +126,46 @@ angular.module('app.controllers', [])
     };
 
     $scope.placeEmptyorder = function(){
-        //orderService.neworder.orderitems = ''; // $scope.orderitems;
-        //orderService.neworder.totalBill = 0;//$scope.totalBill;
-        // orderService.emptyorder = $scope.ordertype;
-        // orderService.neworder.kitchennotes = 'waiting';//$scope.kitchennotes;
-        //orderService.neworder.totalQty = 0;//$scope.totalQty;
-        orderService.emptyorder.covers =orderService.neworder.covers;
-        orderService.emptyorder.table = orderService.neworder.table;
-        orderService.emptyorder.user  = $scope.user.email;
-        var ref = firebase.database().ref();
-        var orders = $firebaseArray(ref.child('orders'));
-        orders.$add(orderService.emptyorder);//.then(function(ref) {
-            //var id = ref.key;
-            //console.log("added record with id " + id);
-            //orders.$indexFor(id); // returns location in the array
-            //orderService.refresh();
-            $state.go('menu.orders');
-        //});
+        var err = [];
+        err.Msg = "";
+        var i =1;
+        if(orderService.neworder.table == 'Select' || orderService.neworder.table == null){
+            err.code = 1;
+            err.Msg +=  i + ". Select table <br />";
+            i++;
+        }
+        if (orderService.neworder.covers <1)
+        {
+            err.code = 1;
+            err.Msg +=  i + ". Select covers <br />";
+            i++;
+        }
+        if(orderService.neworder.waiter == 'Select' || orderService.neworder.waiter == null){
+            err.code = 1;
+            err.Msg +=  i + ". Select waiter <br />";
+            i++;
+        }
+
+        if(i>1)
+        {
+            Utils.errMessage(err);
+        }
+        else
+        {
+            orderService.emptyorder.covers =orderService.neworder.covers;
+            orderService.emptyorder.table = orderService.neworder.table;
+            orderService.emptyorder.user  = orderService.neworder.waiter;//$scope.user.email;
+
+            var ref = firebase.database().ref();
+            var orders = $firebaseArray(ref.child('orders'));
+            orders.$add(orderService.emptyorder).then(function(ref) {
+                var id = ref.key;
+                console.log("added record with id " + id);
+                orders.$indexFor(id); // returns location in the array
+                orderService.refresh();
+                $state.go('menu.orders');
+            });
+        }
     };
   
 	$scope.selectWaiters = function(w) {
