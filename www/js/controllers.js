@@ -107,6 +107,9 @@ angular.module('app.controllers', [])
     $scope.selectedTable = orderService.neworder.table != null ? orderService.neworder.table : "select";
     /* no of customers on the table */
     $scope.covers = orderService.neworder.covers != null ? orderService.neworder.covers : 0;
+	/* no of waiters for the table */
+    $scope.waiters = $firebaseArray(ref.child('waiters'));
+    $scope.selectedWaiter = orderService.neworder.waiters != null ? orderService.neworder.waiters : "select";
     /* get present logged in user details*/
     $scope.user = auth.$getAuth();
 
@@ -118,7 +121,7 @@ angular.module('app.controllers', [])
     };
 
     $scope.selectMenu = function() {
-        orderService.neworder.user = $scope.user.email;
+       /* orderService.neworder.user = $scope.user.email; */
         $state.go("selectMenu");
     };
 
@@ -140,6 +143,11 @@ angular.module('app.controllers', [])
             //orderService.refresh();
             $state.go('menu.orders');
         //});
+    };
+  
+	$scope.selectWaiters = function(w) {
+        orderService.neworder.waiter = $scope.waiters[w - 1];
+
     };
 })
 

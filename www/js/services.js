@@ -104,6 +104,7 @@ angular.module('app.services', [])
     this.neworder = {
         table: null,
         covers: null,
+		waiters: null,
         user: null,
         orderitems: null,
         totalQty: null,
