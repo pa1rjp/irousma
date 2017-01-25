@@ -121,10 +121,10 @@ angular.module('app.controllers', [])
     };
 
     $scope.selectMenu = function() {
-       /* orderService.neworder.user = $scope.user.email; */
         $state.go("selectMenu");
     };
 
+    /*Placing Empty Order */
     $scope.placeEmptyorder = function(){
         var err = [];
         err.Msg = "";
@@ -134,8 +134,7 @@ angular.module('app.controllers', [])
             err.Msg +=  i + ". Select table <br />";
             i++;
         }
-        if (orderService.neworder.covers <1)
-        {
+        if (orderService.neworder.covers <1){
             err.code = 1;
             err.Msg +=  i + ". Select covers <br />";
             i++;
@@ -146,12 +145,10 @@ angular.module('app.controllers', [])
             i++;
         }
 
-        if(i>1)
-        {
+        if(i>1){
             Utils.errMessage(err);
         }
-        else
-        {
+        else{
             orderService.emptyorder.covers =orderService.neworder.covers;
             orderService.emptyorder.table = orderService.neworder.table;
             orderService.emptyorder.user  = orderService.neworder.waiter;//$scope.user.email;
@@ -170,7 +167,6 @@ angular.module('app.controllers', [])
   
 	$scope.selectWaiters = function(w) {
         orderService.neworder.waiter = $scope.waiters[w - 1];
-
     };
 })
 
@@ -347,9 +343,10 @@ angular.module('app.controllers', [])
         orderService.neworder.ordertype = $scope.ordertype;
         orderService.neworder.kitchennotes = $scope.kitchennotes;
         orderService.neworder.totalQty = $scope.totalQty;
-
+        var ref = firebase.database().ref();
         var orders = $firebaseArray(ref.child('orders'));
-        orders.$add(orderService.neworder).then(function(ref) {
+
+        orders.$save(orderService.neworder).then(function(ref) {
             var id = ref.key;
             console.log("added record with id " + id);
             orders.$indexFor(id); // returns location in the array
@@ -454,33 +451,13 @@ angular.module('app.controllers', [])
 })
 
 .controller('mergeOrdersCtrl', function($scope) {
-
 })
 
 .controller('syncMenuCtrl', function($scope, $state) {
-
 })
 
 .controller('showBillsCtrl', function($scope) {
-
 })
 
 .controller('showOrderCtrl', function($scope) {
-    // var ref = firebase.database().ref();
-    //     var orders = $firebaseArray(ref.child('orders'));
-    //     $scope.noorders = true;
-    //     Utils.show();
-    //     orders.$loaded(
-    //         function(orders) {
-    //             if (orders.length == 0) {
-    //                 $scope.noorders = true;
-    //             } else {
-    //                 $scope.noorders = false;
-    //                 $scope.orders = orders;
-    //             };
-    //             Utils.hide();
-    //         },
-    //         function(error) {
-    //             console.error("Error:", error);
-    //         });
 })
